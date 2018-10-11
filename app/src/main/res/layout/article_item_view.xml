@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/listItemHeight"
+    android:background="?attr/selectableItemBackground"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/articleTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/articlePublishDate"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:baselineAligned="false"
+        android:ellipsize="end"
+        android:maxLines="2"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textColor="@android:color/black"
+        android:textStyle="bold"
+        tools:text="@tools:sample/lorem/random" />
+
+    <TextView
+        android:id="@+id/articlePublishDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="8dp"
+        android:baselineAligned="false"
+        android:ellipsize="end"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textColor="@color/colorPrimary"
+        tools:text="@tools:sample/date/ddmmyy" />
+
+    <TextView
+        android:id="@+id/articleTopic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:baselineAligned="false"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textColor="@color/colorPrimary"
+        android:textAllCaps="true"
+        tools:text="SPORT" />
+
+    <TextView
+        android:id="@+id/byLine"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/articleTitle"
+        android:baselineAligned="false"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:textColor="@color/colorPrimary"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="By Moby Dick" />
+
+    <TextView
+        android:id="@+id/trailText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_below="@id/byLine"
+        android:baselineAligned="false"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
+        android:maxLines="2"
+        android:ellipsize="end"
+        tools:text="@tools:sample/lorem/random" />
+
+
+</RelativeLayout>
