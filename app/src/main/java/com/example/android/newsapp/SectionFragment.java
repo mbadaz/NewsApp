@@ -102,7 +102,7 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
             //if loader has already loaded load the cached data
             loader.startLoading();
         }else if(networkInfo != null && networkInfo.isConnected()){
-            //or else fetch new data from the net if there is network
+            ///or else fetch new data from the net if there is network
             loader.forceLoad();
         }else {
             notification.setText(R.string.noNetworkNotice);
