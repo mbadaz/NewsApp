@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/listItemHeight"
+    android:layout_height="wrap_content"
     android:background="?attr/selectableItemBackground"
     android:padding="8dp">
 
@@ -15,7 +15,7 @@
         android:layout_marginRight="8dp"
         android:baselineAligned="false"
         android:ellipsize="end"
-        android:maxLines="2"
+        android:maxLines="3"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
         android:textColor="@android:color/black"
         android:textStyle="bold"
@@ -65,7 +65,7 @@
         android:layout_below="@id/byLine"
         android:baselineAligned="false"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:maxLines="2"
+        android:maxLines="3"
         android:ellipsize="end"
         tools:text="@tools:sample/lorem/random" />
 

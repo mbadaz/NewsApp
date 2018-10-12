@@ -37,6 +37,7 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
     private RecyclerView recyclerView;
     private ProgressBar loadingSpinner;
     private TextView notification;
+    private boolean loaded;
 
     //Item click listener for the RecyclerView
     private final mRecyclerViewAdapater.OnItemClickListener clickListener = new mRecyclerViewAdapater.OnItemClickListener() {
@@ -68,6 +69,10 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
             section = getArguments().getString(ARG_PARAM1);
             loaderId = getArguments().getInt(ARG_PARAM2);
         }
+
+        if(savedInstanceState != null){
+            loaded = savedInstanceState.getBoolean("loaded");
+        }
     }
 
     @Override
@@ -88,12 +93,18 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
         notification = view.findViewById(R.id.notificaton);
         loadingSpinner = view.findViewById(R.id.loadingSpinner);
 
+        //Initialise loader
+        Loader loader = LoaderManager.getInstance(getActivity()).initLoader(loaderId,null, this);
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
-        if (networkInfo != null && networkInfo.isConnected()) {
-            LoaderManager.getInstance(getActivity()).initLoader(loaderId,null, this).forceLoad();
-            //getActivity().getSupportLoaderManager().initLoader(loaderId, null, this).forceLoad();
-        } else {
+
+        if (loaded){
+            //if loader has already loaded load the cached data
+            loader.startLoading();
+        }else if(networkInfo != null && networkInfo.isConnected()){
+            //or else fetch new data from the net if there is network
+            loader.forceLoad();
+        }else {
             notification.setText(R.string.noNetworkNotice);
             loadingSpinner.setVisibility(View.GONE);
         }
@@ -115,10 +126,11 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Object data) {
-        loadingSpinner.setVisibility(View.GONE);
-        if (data != null) {
+                        loadingSpinner.setVisibility(View.GONE);
+        if (data !=  null) {
             articles = (ArrayList<Article>) data;
             recyclerView.setAdapter(new mRecyclerViewAdapater(articles, clickListener));
+            loaded = true;
         } else {
             notification.setText(R.string.noNewsNotice);
         }
@@ -127,5 +139,11 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
     @Override
     public void onLoaderReset(@NonNull Loader loader) {
         loader.reset();
+    }
+
+    @Override
+    public void onSaveInstanceState(@NonNull Bundle outState) {
+        outState.putBoolean("loaded", loaded);
+        super.onSaveInstanceState(outState);
     }
 }
