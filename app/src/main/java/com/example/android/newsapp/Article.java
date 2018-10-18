@@ -7,11 +7,12 @@ class Article {
     private final String byLine;
     private final String trailText;
     private final String articleUrl;
+    private final String thumbnailUrl;
 
     public Article(
             String articleTitle, String articlePublishDate,
             String articleTopic, String articleUrl,
-            String byLine, String trailText) {
+            String byLine, String trailText, String thumbnailUrl) {
 
         this.articleTitle = articleTitle;
         this.articlePublishDate = articlePublishDate;
@@ -19,6 +20,7 @@ class Article {
         this.articleUrl = articleUrl;
         this.byLine = byLine;
         this.trailText = trailText;
+        this.thumbnailUrl = thumbnailUrl;
     }
 
     public String getArticleTitle() {
@@ -43,5 +45,9 @@ class Article {
 
     public String getTrailText() {
         return trailText;
+    }
+
+    public String getThumbnailUrl() {
+        return thumbnailUrl;
     }
 }

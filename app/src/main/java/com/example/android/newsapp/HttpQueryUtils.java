@@ -86,6 +86,8 @@ class HttpQueryUtils {
         String articleUrl;
         String byLine;
         String trailText;
+        String thumbnailUrl;
+
         try {
             //Extract the base JSON objects
             JSONObject root = new JSONObject(response).getJSONObject("response");
@@ -103,11 +105,12 @@ class HttpQueryUtils {
                 JSONObject fields = articleObject.getJSONObject("fields");
                 byLine = fields.optString("byline", "unavailable");
                 trailText = fields.optString("trailText");
+                thumbnailUrl = fields.optString("thumbnail");
 
                 articles.add(new Article(
                         articleTitle, articlePublishDate,
                         articleTopic, articleUrl,
-                        byLine, trailText));
+                        byLine, trailText, thumbnailUrl));
             }
 
             // Return the list of Article objects

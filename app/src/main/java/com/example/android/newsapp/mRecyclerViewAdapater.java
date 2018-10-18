@@ -1,12 +1,16 @@
 package com.example.android.newsapp;
 
 import android.annotation.SuppressLint;
+import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +32,7 @@ public class mRecyclerViewAdapater extends RecyclerView.Adapter<mRecyclerViewAda
         final TextView topic;
         final TextView byLine;
         final TextView trailText;
+        final ImageView thumbnail;
 
         mViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -36,6 +41,7 @@ public class mRecyclerViewAdapater extends RecyclerView.Adapter<mRecyclerViewAda
             topic = itemView.findViewById(R.id.articleTopic);
             byLine = itemView.findViewById(R.id.byLine);
             trailText = itemView.findViewById(R.id.trailText);
+            thumbnail = itemView.findViewById(R.id.thumbnail);
         }
     }
 
@@ -56,6 +62,10 @@ public class mRecyclerViewAdapater extends RecyclerView.Adapter<mRecyclerViewAda
         mViewHolder.topic.setText(article.getArticleTopic());
         mViewHolder.trailText.setText(String.format("%s...", article.getTrailText()));
         mViewHolder.byLine.setText(String.format("By %s", article.getByLine()));
+        GlideApp.with(mViewHolder.itemView.getContext()).
+                load(makeUri(article.getThumbnailUrl())).centerCrop().
+                diskCacheStrategy(DiskCacheStrategy.AUTOMATIC).
+                into(mViewHolder.thumbnail);
         mViewHolder.publishDate.setText(
                 stringToDate(article.getArticlePublishDate()));
         mViewHolder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -85,5 +95,9 @@ public class mRecyclerViewAdapater extends RecyclerView.Adapter<mRecyclerViewAda
             e.printStackTrace();
             return sDate;
         }
+    }
+
+    private Uri makeUri(String url){
+            return Uri.parse(url);
     }
 }

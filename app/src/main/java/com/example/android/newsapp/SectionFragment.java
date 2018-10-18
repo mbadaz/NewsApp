@@ -118,7 +118,7 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
     public Loader onCreateLoader(int i, @Nullable Bundle bundle) {
         Uri baseUri = Uri.parse(GUARDIAN_API_BASE_URL + section);
         Uri.Builder builder = baseUri.buildUpon();
-        builder.appendQueryParameter("show-fields", "byline,trailText");
+        builder.appendQueryParameter("show-fields", "byline,trailText,thumbnail");
         builder.appendQueryParameter("page-size", "15");
         builder.appendQueryParameter("api-key", API_KEY);
         return new NewsLoader(getContext(), builder.toString());

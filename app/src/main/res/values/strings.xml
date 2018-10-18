@@ -3,6 +3,7 @@
     <string name="navDefaultLabel">WORLD</string>
     <string name="noNetworkNotice">No network connection please enable network\nto view the news</string>
     <string name="noNewsNotice">Nothing to show at the moment or network error\n please try again later</string>
+    <string name="thumbnailDescription">Article image</string>
 
     <string-array name="TOPICS">
         <item>POLITICS</item>

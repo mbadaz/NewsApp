@@ -6,17 +6,25 @@
     android:background="?attr/selectableItemBackground"
     android:padding="8dp">
 
+    <ImageView
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:id="@+id/thumbnail"
+        android:layout_centerVertical="true"
+        android:contentDescription="@string/thumbnailDescription"/>
+
     <TextView
         android:id="@+id/articleTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/articlePublishDate"
+        android:layout_toRightOf="@id/thumbnail"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         android:baselineAligned="false"
         android:ellipsize="end"
         android:maxLines="3"
-        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Medium"
+        android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:textColor="@android:color/black"
         android:textStyle="bold"
         tools:text="@tools:sample/lorem/random"/>
@@ -38,6 +46,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
+        android:layout_toRightOf="@id/thumbnail"
         android:baselineAligned="false"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:textColor="@color/colorPrimary"
@@ -50,6 +59,7 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_below="@id/articleTitle"
+        android:layout_toRightOf="@id/thumbnail"
         android:baselineAligned="false"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
         android:textColor="@color/colorPrimary"
@@ -63,9 +73,10 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_below="@id/byLine"
+        android:layout_toRightOf="@id/thumbnail"
         android:baselineAligned="false"
         android:textAppearance="@android:style/TextAppearance.DeviceDefault.Small"
-        android:maxLines="3"
+        android:maxLines="2"
         android:ellipsize="end"
         tools:text="@tools:sample/lorem/random" />
 
