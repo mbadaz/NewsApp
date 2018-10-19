@@ -11,6 +11,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.Loader;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,9 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
     private int loaderId;
     private RecyclerView recyclerView;
     private ProgressBar loadingSpinner;
+    private Loader loader;
     private TextView notification;
+    private SwipeRefreshLayout refreshLayout;
     private boolean loaded;
 
     //Item click listener for the RecyclerView
@@ -92,9 +95,16 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
         recyclerView.addItemDecoration(new DividerItemDecoration(recyclerView.getContext(), DividerItemDecoration.VERTICAL));
         notification = view.findViewById(R.id.notificaton);
         loadingSpinner = view.findViewById(R.id.loadingSpinner);
+        refreshLayout = view.findViewById(R.id.swipe_refresh);
+        refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                refresh();
+            }
+        });
 
         //Initialise loader
-        Loader loader = LoaderManager.getInstance(getActivity()).initLoader(loaderId,null, this);
+        loader = LoaderManager.getInstance(getActivity()).initLoader(loaderId,null, this);
         ConnectivityManager cm = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo = cm.getActiveNetworkInfo();
 
@@ -126,7 +136,16 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
 
     @Override
     public void onLoadFinished(@NonNull Loader loader, Object data) {
-                        loadingSpinner.setVisibility(View.GONE);
+        loadingSpinner.setVisibility(View.GONE);
+
+        if (!String.valueOf(notification.getText()).isEmpty()){
+            notification.setText(null);
+        }
+
+        if(refreshLayout.isRefreshing()){
+            //if the layout is refreshing then stop the refresh
+            refreshLayout.setRefreshing(false);
+        }
         if (data !=  null) {
             articles = (ArrayList<Article>) data;
             recyclerView.setAdapter(new mRecyclerViewAdapater(articles, clickListener));
@@ -145,5 +164,10 @@ public class SectionFragment extends android.support.v4.app.Fragment implements 
     public void onSaveInstanceState(@NonNull Bundle outState) {
         outState.putBoolean("loaded", loaded);
         super.onSaveInstanceState(outState);
+    }
+
+    private void refresh(){
+        loader.reset();
+        loader.forceLoad();
     }
 }

@@ -4,10 +4,18 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/articleRecylerView"
+    <android.support.v4.widget.SwipeRefreshLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:id="@+id/swipe_refresh"
+        android:theme="@style/AppTheme">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/articleRecylerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </android.support.v4.widget.SwipeRefreshLayout>
 
     <ProgressBar
         android:id="@+id/loadingSpinner"
@@ -25,7 +33,6 @@
         android:textAppearance="@style/Base.TextAppearance.AppCompat.Medium"
         android:textColor="@color/colorPrimaryDark"
         tools:text="Error no network connection" />
-
 
 </RelativeLayout>
 

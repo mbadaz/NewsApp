@@ -23,4 +23,7 @@ public class ExampleInstrumentedTest {
 
         assertEquals("com.example.android.newsapp", appContext.getPackageName());
     }
+
+
+
 }
